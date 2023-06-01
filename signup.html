@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page Form</title>
+   <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Sohanlalkush/slk/login/style.css">        
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="center">
+  <div class="ear ear--left"></div>
+  <div class="ear ear--right"></div>
+  <div class="face">
+    <div class="eyes">
+      <div class="eye eye--left">
+        <div class="glow"></div>
+      </div>
+      <div class="eye eye--right">
+        <div class="glow"></div>
+      </div>
+    </div>
+    <div class="nose">
+      <svg width="38.161" height="22.03">
+        <path d="M2.017 10.987Q-.563 7.513.157 4.754C.877 1.994 2.976.135 6.164.093 16.4-.04 22.293-.022 32.048.093c3.501.042 5.48 2.081 6.02 4.661q.54 2.579-2.051 6.233-8.612 10.979-16.664 11.043-8.053.063-17.336-11.043z" fill="#243946"></path>
+      </svg>
+      <div class="glow"></div>
+    </div>
+    <div class="mouth">
+      <svg class="smile" viewBox="-2 -2 84 23" width="84" height="23">
+        <path d="M0 0c3.76 9.279 9.69 18.98 26.712 19.238 17.022.258 10.72.258 28 0S75.959 9.182 79.987.161" fill="none" stroke-width="3" stroke-linecap="square" stroke-miterlimit="3"></path>
+      </svg>
+      <div class="mouth-hole"></div>
+      <div class="tongue breath">
+        <div class="tongue-top"></div>
+        <div class="line"></div>
+        <div class="median"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hands">
+    <div class="hand hand--left">
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+    </div>
+    <div class="hand hand--right">
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+      <div class="finger">
+        <div class="bone"></div>
+        <div class="nail"></div>
+      </div>
+    </div>
+  </div>
+  <form id="su" class="login">
+      <label>
+      <div class="fa fa-user"></div>
+      <input style="padding: 0 10px 0 35px;" id="name" class="name" type="text" autocomplete="on" placeholder="Name"/>
+    </label>
+    <label>
+    <div class="fa fa-university"></div>
+      <input style="padding: 0 10px 0 35px;" id="college" class="university" type="text" autocomplete="on" placeholder="University/College"/>
+    </label>
+    <label>
+      <div class="fa fa-whatsapp">  </div>
+      <input id="su-phone" type="tel" name="su-phone" class="username"  maxlength="10" placeholder="WhatsApp Number" autocomplete="on" />
+      <button id="otp-btn" style="top:9px;"class="password-button" onclick="process (event)">Send OTP</button>
+    </label>
+    <div class="alert su-alert-info" style="display: none;"></div>
+    
+    <label>
+      <div class="fa fa-commenting"></div>
+      
+     <input placeholder="OTP" type="text" inputmode="numeric" class="password" id="su-otp-input" maxlength="4" autocomplete="off" style="padding: 0 50px 0 40px;text-align:center; font-size:16px; letter-spacing:0.5em;" oninput="moveToNextInput(event)">
+<script>
+function moveToNextInput(event) {
+  if (event.target.value.length >= event.target.maxLength) {
+    var nextInput = event.target.nextElementSibling;
+    if (nextInput) {
+      nextInput.focus();
+    }
+  }
+}
+document.getElementById('su-otp-input').addEventListener('paste', function(event) {
+  var clipboardData = event.clipboardData || window.clipboardData;
+  var pastedData = clipboardData.getData('text');
+  if (pastedData.length > 4) {
+    event.preventDefault();
+    document.getElementById('su-otp-input').value = pastedData.substring(0, 4);
+  }
+});
+</script>
+</input>
+
+    </label>    
+    
+    <button id="signup" class="login-button">signup</button>
+  </form> <br/><br/>
+  <p style="text-align: center;">Already have an account <a style="text-decoration:none; color:red;" href="./login"><b>Sign in</b></a>
+</p>
+   </div>
+   
+
+</div>
+<!-- partial -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script> 
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js'></script>
+   <script  src="https://cdn.jsdelivr.net/gh/Sohanlalkush/slk/login/script.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ <script>  
+   //if (window.location.hostname.split('.')[1] !== 'pharmalite') {  window.location.replace('https://www.pharmalite.in'); }   
+    const info = document.querySelector(".su-alert-info"); 
+    function process(event) {    
+     event.preventDefault();
+     const phoneNumber = phoneInput.getNumber(); info.style.display = ""; 
+     phoneno = phoneNumber;
+     if (phoneNumber.length < 7) {
+     alert("Please enter a valid phone number."); return; }
+     disableButton();
+     checkNumber(phoneNumber);
+      
+    }
+    <!--  -->
+    var phoneno ="";
+  const phoneInputField = document.querySelector("#su-phone");
+  const phoneInput = window.intlTelInput(phoneInputField, {
+  preferredCountries: ["in", "us", "np", "pk"],
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.min.js",
+  });
+<!--  -->
+    var randomNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    const opt = randomNumber ;
+
+<!--  -->
+function disableButton() {
+  var button = document.getElementById("otp-btn");
+  button.disabled = true;
+  button.style.backgroundColor = '#adb6ba';
+  setTimeout(function() {
+    button.disabled = false;
+    button.style.backgroundColor = '#243946';
+  }, 30000);
+}
+<!--  -->   
+function checkNumber(phoneNumber) { 
+   const phone = phoneNumber.slice(1);
+    const xhr = new XMLHttpRequest();
+const url = 'https://user.team-1431785.repl.co/read';
+const payload = JSON.stringify({ 
+wano: phone,
+ });
+
+xhr.open('POST', url, true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    const response = JSON.parse(xhr.responseText);
+    console.log(xhr.responseText)
+    const data = JSON.parse(xhr.responseText);
+    
+     Ermessage = data.message;
+   
+  if ( Ermessage !== 'Data not found' ) {
+   
+    info.style.display = "";
+    info.innerHTML = `<p style="text-align: center;color:red;"> Phone : <strong>${phoneNumber}</strong> is already registered <a style="text-decoration:none; color:#243946;" href=""><b>Login Now!</b></a></p>`; 
+        
+    } else {
+    info.style.display = "";
+   info.innerHTML = `<p style="text-align: center;color:#243946;">OTP has been sent to your WhatsApp : <strong>${phoneNumber}</strong></p>`; 
+    const xhr = new XMLHttpRequest();
+const url = "https://wabail.team-1431785.repl.co/chats/send?id=chat";
+ const text = opt+" is your OTP for Registration on Pharmalite.in OTP is valid for 5 mins. Do not share OTP for security reason. \n \n★ For more details visit on pharmalite.in \n★ SUBSCRIBE for Support us https://youtube.com/@pharmalite ";
+const params = JSON.stringify({
+    "receiver": phone,
+    "message": {
+    "text": text
+    }
+});
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+    }
+};
+xhr.send(params);
+}
+        
+    }
+};
+xhr.send(payload);
+
+}
+
+<!--  -->
+    
+    const form = document.querySelector('#su');
+const phoneNumber = phoneInput.getNumber();
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const otp = document.querySelector('#su-otp-input').value;
+    if (otp === opt ) {  
+     register();
+    } else  {
+        info.style.display = "";
+     info.innerHTML = `<p style="text-align: center;color:red;"> Incorrect OTP for <strong>${phoneno}</strong>  </p>`; 
+    }
+  });
+<!--  --> 
+function register() {
+      const name = document.querySelector('#name').value;
+    const college = document.querySelector('#college').value;
+    const wano = phoneno.slice(1);
+    const number = wano.slice(2);
+    paymentAmount = 2 ;
+    
+      var orderData = {
+        name: name,
+        number: number,
+        college: college,
+      };
+
+      var options = {
+        key: 'rzp_live_HI7WMzKiS4NsHp', 
+        
+        amount: paymentAmount * 100, 
+        currency: 'INR', 
+        name: 'Bundelkhan University', 
+       image: 'https://logo.clearbit.com/bujhansi.ac.in',
+        description: 'Payment for pharmalite ai ' ,
+        handler: function(response) {
+          registerd(name, wano, college);
+        },
+        prefill: {
+          name: name,
+          contact: number,
+        },
+      };
+
+      var rzp = new Razorpay(options);
+      rzp.open();
+    }
+<!--  -->
+    function registerd(name, wano, college) { 
+    var paymentDate = new Date().toISOString().slice(0, 10);
+    const xhr = new XMLHttpRequest();
+const url = 'https://user.team-1431785.repl.co/write';
+const payload = JSON.stringify({ 
+wano: wano,
+name : name,
+college : college,
+pdate : paymentDate
+ });
+
+xhr.open('POST', url, true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    const response = JSON.parse(xhr.responseText);
+    console.log(xhr.responseText)
+    const data = JSON.parse(xhr.responseText);
+    
+     Ermessage = data.message;
+     console.log(wano); 
+     console.log(name);
+     console.log(college);
+     
+   
+  if ( Ermessage == 'Successfully registered' ) {
+   
+    info.style.display = "";
+    info.style.display = "";
+     info.innerHTML = `<p style="text-align: center;color:#243946;">  <strong>${phoneno}
+     </strong> successfully registered login now!</p>`;
+        alert('Registration successfull redirecting on login in 3 seconds...');
+
+// Wait for 3 seconds
+setTimeout(function() {
+  // Redirect the page to the specified URL
+  window.location.replace('./login.html');
+}, 3000);
+    } else {
+    info.style.display = "";
+   info.innerHTML = `<p style="text-align: center;color:red;"> not registered error</strong></p>`; 
+    
+}
+        
+    }
+};
+xhr.send(payload);
+
+}
+</script>
+</body>
+</html>
